@@ -1,0 +1,717 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>出版社浏览</title>
+{% endblock %}
+
+{% block content %}
+
+
+<!-- End header -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/hot.css' %}" />
+<style>
+#main dd{
+    display: block;
+    height: 40px;
+}
+#main  li {
+    list-style: none;
+    padding: 0 4px 0 4px;
+    margin: 0 auto;
+    float: left;
+}
+#main li a {
+    display: block;
+    height: 14px;
+    width: 14px;
+    line-height: 13px;
+    border: 1px solid #ffffff;
+    color: #999999;
+    font-size: 14px;
+    text-decoration: none;
+
+}
+#main table tr td a{
+    color:#000000;
+}
+
+#main table tr td a:hover{
+    color:red;
+}
+
+.pinyinWrap{
+    background: #f3f3f3;
+}
+
+.pinyinWrap h1{
+    display: none;
+    margin-top: 12px;
+    {#font-size: 1px;#}
+    font-weight: normal;
+    color: #e60000;
+    text-indent: 16px;
+    line-height: 22px;
+}
+.pinyinWrap.fixed{
+    position: fixed;
+    background: #ffffff;
+    z-index:998;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-bottom: none;
+    box-shadow:0 0 10px #999;
+}
+
+.pinyinWrap.fixed h1{
+    display: block;
+}
+
+</style>
+<div id="main">
+    <br><br>
+    <div class="pinyinWrap">
+        <h1>出版社浏览</h1>
+        <dl>
+            <dt style="float: left;color: #666666;line-height: 46px;margin-right: 10px;text-indent: 16px">按字母检索：</dt>
+            <dd>
+                <ul style="list-style: none;float: left;height: 20px;margin: 15px 2px 0 0;">
+                    <li><a href="#A">A</a></li>
+                    <li><a href="#B">B</a></li>
+                    <li><a href="#C">C</a></li>
+                    <li><a href="#D">D</a></li>
+                    <li><a href="#E">E</a></li>
+                    <li><a href="#F">F</a></li>
+                    <li><a href="#G">G</a></li>
+                    <li><a href="#H">H</a></li>
+                    <li><a href="#I">I</a></li>
+                    <li><a href="#J">J</a></li>
+                    <li><a href="#K">K</a></li>
+                    <li><a href="#L">L</a></li>
+                    <li><a href="#M">M</a></li>
+                    <li><a href="#N">N</a></li>
+                    <li><a href="#O">O</a></li>
+                    <li><a href="#P">P</a></li>
+                    <li><a href="#Q">Q</a></li>
+                    <li><a href="#R">R</a></li>
+                    <li><a href="#S">S</a></li>
+                    <li><a href="#T">T</a></li>
+                    <li><a href="#U">U</a></li>
+                    <li><a href="#V">V</a></li>
+                    <li><a href="#W">W</a></li>
+                    <li><a href="#X">X</a></li>
+                    <li><a href="#Y">Y</a></li>
+                    <li><a href="#Z">Z</a></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <br><br><br>
+    <div >
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="A">A</caption>
+            <tbody>
+            <tr>
+                <td><a href="{% url 'bookapp:press_detail_books' 5 %}">安徽大学出版社</a></td>
+                <td><a href="{% url 'bookapp:press_detail_books' 6 %}">安徽教育出版社</a></td>
+                <td><a href="">安徽教育电子音像出版社</a></td>
+                <td><a href="">安徽科学技术出版社</a></td>
+                <td><a href="">安徽美术出版社</a></td>
+                <td><a href="">安徽人民出版社</a></td>
+            </tr>
+            <tr>
+                <td><a href="">安徽少年儿童出版社</a></td>
+                <td><a href="">安徽文艺出版社</a></td>
+                <td><a href="">安徽音像出版社</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="B">B</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="C">C</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="D">D</caption>
+            <tbody>
+            <tr>
+                <td><a href="{% url 'bookapp:press_detail_books' 3 %}">电子工业出版社</a></td>
+                <td><a href="">东方出版社</a></td>
+                <td><a href="">地质出版社</a></td>
+                <td><a href="">东软电子出版社</a></td>
+                <td><a href="">东南大学出版社</a></td>
+                <td><a href="">东华大学出版社</a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="E">E</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="F">F</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="G">G</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="H">H</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="I">I</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="J">J</caption>
+            <tbody>
+            <tr>
+                <td><a href="{% url 'bookapp:press_detail_books' 2 %}">机械工业出版社</a></td>
+                <td><a href="">吉林出版集团</a></td>
+                <td><a href="">吉林大学出版社</a></td>
+                <td><a href="">吉林电子出版社</a></td>
+                <td><a href="">吉林教育出版社</a></td>
+                <td><a href="">济南出版社</a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="K">K</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="L">L</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="M">M</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="N">N</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="O">O</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="P">P</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="Q">Q</caption>
+            <tbody>
+            <tr>
+                <td><a href="{% url 'bookapp:press_detail_books' 1 %}">清华大学出版社</a></td>
+                <td><a href="">青岛出版社</a></td>
+                <td><a href="">齐鲁书社</a></td>
+                <td><a href="">群众出版社</a></td>
+                <td><a href="">气象出版社</a></td>
+                <td><a href="">企业管理出版社</a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="R">R</caption>
+            <tbody>
+            <tr>
+                <td><a href="{% url 'bookapp:press_detail_books' 4 %}">人民邮电出版社</a></td>
+                <td><a href="">人民出版社</a></td>
+                <td><a href="">人民法院出版社</a></td>
+                <td><a href="">人民日报出版社</a></td>
+                <td><a href="">人民美术出版社</a></td>
+                <td><a href="">人民中国出版社</a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="S">S</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="T">T</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="U">U</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="V">V</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="W">W</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="X">X</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="Y">Y</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <table class="table table-bordered">
+            <caption style="color: red;background: #f3f3f3;font-weight: bold;text-indent: 14px" id="Z">Z</caption>
+            <tbody>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+            </tr>
+            <tr>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <script type="text/javascript">
+$(function() {
+	$(window).scroll(function(){
+		var scrolltop=$(this).scrollTop();
+		if(scrolltop>=200){
+			$(".pinyinWrap").addClass('fixed');
+		}else{
+			$(".pinyinWrap").removeClass('fixed');
+		}
+	});
+	{#$("#back_top").click(function(){#}
+	{#	$("html,body").animate({scrollTop: 0}, 500);#}
+	{# });#}
+ $('a[href*=#],area[href*=#]').click(function() {
+    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+      var $target = $(this.hash);
+      $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+      if ($target.length) {
+        var targetOffset = $target.offset().top;
+        $('html,body').animate({
+          scrollTop: targetOffset
+        },
+        1000);
+        return false;
+      }
+    }
+  });
+ });
+</script>
+
+<!-- Begin footer -->
+{% endblock %}

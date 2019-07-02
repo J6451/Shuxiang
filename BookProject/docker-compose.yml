@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  dj_web:
+    build: .
+    command: python3 ./manage.py runserver 0:8001
+    volumes:
+      - .:/code
+    ports:
+      - "8091:8001"
+    depends_on:
+      - db
+    networks:
+      default:
+        aliases:
+          - dj.com
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=docker_books
+      - MYSQL_ROOT_PASSWORD=jin123
+    ports:
+      - "3311:3311"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+

@@ -1,0 +1,216 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>我的订单</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+{#<script src="Script/saved_resource"></script>#}
+<link rel="stylesheet" href="{% static 'css/user.css' %}" type="text/css" media="screen, projection">
+<script type="text/javascript" src="{% static 'Script/user.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+
+<div id="main">
+<div class="position">
+    <a href="{% url 'bookapp:index' %}"><strong>首页</strong></a>
+    <i>&gt;</i>
+    <a href="{% url 'bookapp:member_center' %}" target="_parent" class="c0e7">会员中心</a>
+    <i>&gt;</i>
+    <span>浏览历史</span>
+</div>
+<div class="rightArea">
+    <!-- 便利提醒 Begin -->
+    <div class="prompt">
+        <div class="pr_top">
+            <b class="tit">浏览历史</b>
+            <!-- 联系客服 -->
+{#            <div id="contact_kf_div" class="u__kf">     	#}
+{#            </div>#}
+        </div>
+
+    </div>
+    <!-- 便利提醒 End -->
+
+{#    <div class="clear"></div>#}
+        <!-- order表单 Begin -->
+    <div class="odrTab">
+        <div class="ot_top">
+{#            <form action="">#}
+{#                <div class="left">#}
+{#                    <select name="datetime">#}
+{#                        <option selected="selected" value="">所有订单</option>#}
+{#                        <option value="1">近一个月订单</option>#}
+{#                        <option value="2">近三个月订单</option>#}
+{#                        <option value="3">近一年订单</option>#}
+{#                    </select>#}
+{#                    <select name="order_status">#}
+{#                                                <option value="">全部状态</option>#}
+{#                                                    <option value="1">未确认</option>#}
+{#                                                    <option value="2">确认中</option>#}
+{#                                                    <option value="3">已确认</option>#}
+{#                                                    <option value="4">待发货</option>#}
+{#                                                    <option value="5">分单发货中</option>#}
+{#                                                    <option value="6">已发货</option>#}
+{#                                                    <option value="7">已取消</option>#}
+{#                                                    <option value="8">待支付</option>#}
+{#                                            </select>#}
+{##}
+{#                </div>#}
+{#                <div class="right">#}
+{#                    &lt;订单编号：&gt;<!--订单编号：-->#}
+{#                    <input type="text" class="txt" name="order_id" value="" onfocus="javascript:$(this).val(&#39;&#39;);">#}
+{#                    <input type="submit" class="lookup" value="查询">#}
+{#                </div>#}
+{#            </form>#}
+        </div>
+    </div>
+    <div class="account">
+        <div class="hisOrd">
+                <table class="ho_middle" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr class="t">
+{#                            <td class="w120">订单编号</td>#}
+                            <td class="w120">商品图片</td>
+                            <td class="w186">商品名</td>
+                            <td class="w111">商品金额</td>
+                            <td class="w87">浏览时间</td>
+{#                            <td class="w87">订单状态</td>#}
+                            <td class="w130">操作</td>
+                        </tr>
+                        {% for brow_history in brow_historys %}
+                            <tr class="c">
+                                <td class="w120 adjust02" style="text-align:left;">
+                                    <img src="{{ brow_history.book.image.url }}" alt="">
+                                </td>
+                                <td class="w186 h70"><span class="c333">{{ brow_history.book.book_name }}</span></td>
+                                <td class="w111 adjust01">
+                                    <span class="cb01">{{ brow_history.book.price }}</span><br>
+                                </td>
+                                <td class="w87 adjust01">
+                                    <div>{{ brow_history.time }}</div>
+                                </td>
+                                <td class="w130 adjust03">
+                                    <a class="c0e7" href="{% url 'bookapp:detail' brow_history.book.id %}">查看</a>
+                                    <span>|</span>
+                                    <a class="c0e7" href="{% url 'bookapp:book_borrow' brow_history.book.id %}">借阅</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    <!-- order表单 End -->
+            <div id="page_nav" style="float: right;">
+            	<span>一共有&nbsp;{{ brow_historys.paginator.count }}&nbsp;条记录&nbsp;&nbsp;</span>
+                {% if brow_historys.has_previous %}
+{#                    <span class="pre">#}
+                        <a href="?page={{ brow_historys.previous_page_number }}">上一页
+                            <span></span>
+                        </a>
+{#                    </span>&nbsp;#}
+                {% endif %}
+
+{#	      		<span class="cur">1</span>&nbsp;#}
+
+{#	      		<span>&hellip;</span>&nbsp;#}
+                    {% if brow_historys.has_next %}
+	      		    <a href="?page={{ brow_historys.next_page_number }}" class="next">下一页
+	      			    <span></span>
+	      		    </a>&nbsp;
+                    {% endif %}
+            </div>
+    <!-- 翻页 Begin -->
+        <!-- 翻页 End -->
+
+</div>
+
+<!-- 左边菜单 Begin -->
+<div class="leftArea">
+    <div class="leftArea">
+    	<!-- LOGO -->
+{#    <div class="u__mine">#}
+{#    	<a href="http://user.wbiao.cn/" style="display: block; height: 100%;"></a>#}
+{#    </div>#}
+        <div style="width: 180px;height: 40px;background: #2176c6;margin: 0 auto;text-align: center;display: table">
+            <span style="display: table-cell;vertical-align: middle;color: white">
+                <span style="font-size: 16px;">我的书籍&nbsp;</span>
+                MY BOOKS
+            </span>
+        </div>
+    <div class="floor">
+        <div class="t"><i class="u__trade"></i><font class="f_fixed">交易管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i ></i><a href="{% url 'bookapp:member_center' %}"  title="我的订单" rel="nofollow">我的订单 (<span class="cb01">{{ book_amount }}</span>)</a></li>
+                <!--<li><i></i><a href="#" title="我的预售" rel="nofollow">我的预售 (<span class="cb01">0</span>)</a></li>-->
+                <li><i></i><a href="{% url 'bookapp:member_address' %}" title="收货地址" rel="nofollow">收货地址</a></li>
+                <!--<li><i></i><a href="#" title="礼品卡" rel="nofollow">礼品卡</a></li>-->
+                <!--<li style="border:0;"><i></i><a href="#" title="代金券/优惠券" rel="nofollow">代金券/优惠券</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="t"><i class="u__datum"></i><font class="f_fixed">账户管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a href="{% url 'bookapp:personal_data' %}" title="个人资料" rel="nofollow">个人资料</a></li>
+                <li><i></i><a href="{% url 'bookapp:member_change_password' %}" title="修改密码" rel="nofollow">修改密码</a></li>
+                <!--<li><i></i><a  href="#" title="我的收藏" rel="nofollow">我的收藏</a></li>-->
+                <li><i></i><a  href="{% url 'bookapp:member_brow_history' %}" title="浏览历史" rel="nofollow" class="ccf0">浏览历史</a></li>
+                <li><i></i><a  href="{% url 'bookapp:member_personality_analysis' %}" title="个性分析" rel="nofollow">个性分析</a></li>
+                <li style="border:0;"><i></i><a href="{% url 'bookapp:member_recommend_for_me' %}" title="为我推荐" rel="nofollow">为我推荐</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="floor">
+        <div class="t"><i class="u__integral"></i><font class="f_fixed">积分管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a  href="#" title="我的积分" rel="nofollow">我的积分</a></li>
+                <li><i></i><a  href="#" title="积分细则" rel="nofollow">积分细则</a></li>
+                <li style="border:0;"><i></i><a  href="#" title="推荐有礼" rel="nofollow">推荐有礼</a></li>
+            </ul>
+        </div>
+    </div>-->
+    <div class="floor">
+        <div class="t"><i class="u__service"></i><font class="f_fixed">消息管理</font></div>
+        <div class="c">
+            <ul>
+                <!--<li><i></i><a href="#" title="购买咨询" rel="nofollow">购买咨询</a></li>-->
+                <li><i></i><a href="{% url 'bookapp:member_comment' %}" title="我的评论" rel="nofollow">我的评论</a></li>
+{#                <li style="border:0;"><i></i><a href="#" title="我的消息" rel="nofollow">我的消息(<span class="cb01">0</span>)</a></li>#}
+                <!--<li style="border:0;"><i></i><a href="#" title="促销通知" rel="nofollow">促销通知</a></li>-->
+                                <li style="border:0;"><i></i><a href="{% url 'bookapp:member_information' %}" title="我的消息" rel="nofollow">我的消息(<span class="cb01">{{ information_len }}</span>)</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="t"><i class="u__star"></i><font class="f_fixed">书香盈袖会员</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a href="#" title="会员简介" rel="nofollow">会员简介</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="logout">
+        <a href="{% url 'user:logout' %}" class="c999">退出登录</a>
+    </div>
+</div></div>
+<!-- 左边菜单 End -->
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+<!-- Begin footer -->

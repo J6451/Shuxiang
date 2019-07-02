@@ -1,0 +1,352 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>我的订单</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+{#<script src="Script/saved_resource"></script>#}
+<link rel="stylesheet" href="{% static 'css/user.css' %}" type="text/css" media="screen, projection">
+<script type="text/javascript" src="{% static 'Script/user.js' %}"></script>
+{#<link rel="stylesheet" href="{% static 'css/user.css' %}">#}
+
+{#  div弹出层css #}
+    <style type="text/css">
+
+    .white_content {
+	display: none;
+	position: absolute;
+	top: 15%;
+	left: 25%;
+	width: 632px;
+	height: 445px;
+	border: 8px solid #FFF;
+	border-bottom:none;
+	background-color: #eae3d9;
+	z-index:1002;
+	overflow: auto;
+}
+    </style>
+
+
+
+
+<div id="main">
+<div class="position">
+    <a href="{% url 'bookapp:index' %}"><strong>首页</strong></a>
+    <i>&gt;</i>
+    <a href="{% url 'bookapp:member_center' %}" target="_parent" class="c0e7">会员中心</a>
+    <i>&gt;</i>
+    <span>收货地址</span>
+</div>
+<div class="rightArea">
+    <!-- 便利提醒 Begin -->
+    <div class="prompt">
+        <div class="pr_top">
+            <b class="tit">我的收货地址</b>
+            <!-- 联系客服 -->
+{#            <div id="contact_kf_div" class="u__kf">#}
+{#            </div>#}
+            <a class="btn" style="float: right;color: #A80000;" id="creat_new" onClick="document.getElementById('light').style.display='block';">添加新地址</a>
+        </div>
+
+    </div>
+
+{#     div弹出层开始#}
+    <div id="light" class="white_content">
+        <form action="{% url 'bookapp:member_address' %}" method="post">
+            {% csrf_token %}
+            <div style="width: 90%;height: 85%;margin: 0 auto"><br><br>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">收件人</span>
+                    <input type="text" class="form-control" aria-describedby="basic-addon1" name="recipient">
+                </div>
+                <br><br>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">手机号</span>
+                    <input type="text" class="form-control" aria-describedby="basic-addon1" name="cell_phone">
+                </div>
+                <br><br>
+                <div style="width: 100%;">
+                    <div style="width: 22%;float: left;margin: 0 5px 0 5px">
+                        <select id="pro" class="form-control" name="province">
+                            <option value="">请选择省</option>
+                        </select>
+                    </div>
+                    <div style="width: 22%;float: left;margin: 0 5px 0 5px">
+                        <select id="city" class="form-control" name="city">
+                            <option value="">请选择市</option>
+                        </select>
+                    </div>
+                    <div style="width: 22%;float: left;margin: 0 5px 0 5px">
+                        <select id="dis" class="form-control" name="country">
+                            <option value="">请选择区县</option>
+                        </select>
+                    </div>
+                    <div style="width: 24%;float: left;margin: 0 5px 0 5px">
+                        <select id="street" class="form-control" name="street">
+                            <option value="">请选择街道</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+                <div class="form-group"><br>
+                    <textarea class="form-control" name="detail_address" id="" cols="10" rows="10" style="height: 40%" placeholder="详细地址：如道路、门牌号、小区、楼栋号、单元室等"></textarea>
+                </div>
+            </div>
+            <div style="width: 90%;margin: 0 auto;">
+                <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';" class="btn btn-info" style="float:left">关闭</a>
+                <button class="btn btn-danger" style="float:right" type="submit">保存</button>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+            $(function(){
+                {# 开始将省列表展示出来 #}
+                $.get("{% url 'user:area1' %}",function(dic) {
+                    pro=$('#pro');
+                    $.each(dic.data,function(index,item){
+                        pro.append('<option value='+item[0]+'>'+item[1]+'</option>');
+                    })
+                });
+
+
+                {#  当省发生改变时，触发ajax请求，根据省的id获取到市的列表  #}
+                $('#pro').change(function(){
+                    $.ajax({
+                        url:"/user/area2/"+$(this).val()+'/',
+                        type:"POST",
+                        data:{
+                            csrfmiddlewaretoken:'{{ csrf_token }}'
+                         },
+                        success:function (dic) {
+                            city=$('#city');
+                            city.empty().append('<option value="">请选择市</option>');
+                            $.each(dic.data,function(index,item){
+                            city.append('<option value='+item.id+'>'+item.name+'</option>');
+                        })
+                        }
+                    })
+                });
+
+                {#  当市发生改变时，触发ajax请求，根据市的id获取到县、区的列表  #}
+                $('#city').change(function(){
+                    $.ajax({
+                        url:"/user/area2/"+$(this).val()+'/',
+                        type:"POST",
+                        data:{
+                            csrfmiddlewaretoken:'{{ csrf_token }}'
+                         },
+                        success:function (dic) {
+                           dis=$('#dis');
+                            dis.empty().append('<option value="">请选择区县</option>');
+                            $.each(dic.data,function(index,item){
+                            dis.append('<option value='+item.id+'>'+item.name+'</option>');
+                        })
+                        }
+                    })
+                });
+
+                {#  当县、区发生改变时，触发ajax请求，根据县、区的id获取到街道、镇的列表 #}
+                $('#dis').change(function(){
+                    $.ajax({
+                        url:"/user/area2/"+$(this).val()+'/',
+                        type:"POST",
+                        data:{
+                            csrfmiddlewaretoken:'{{ csrf_token }}'
+                         },
+                        success:function (dic) {
+                           street=$('#street');
+                            street.empty().append('<option value="">请选择街道</option>');
+                            $.each(dic.data,function(index,item){
+                            street.append('<option value='+item.id+'>'+item.name+'</option>');
+                        })
+                        }
+                    })
+                });
+
+
+            });
+    </script>
+{#     div弹出层结束#}
+
+
+
+
+     <div class="account" id="aa">
+        <div class="hisOrd">
+                <table class="ho_middle" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr class="t">
+                            <td class="w75">收货人</td>
+                            <td class="w120">手机号</td>
+                            <td class="w186">收货地址</td>
+{#                            <td class="w111">订单金额</td>#}
+{#                            <td class="w87">下单时间</td>#}
+{#                            <td class="w87">订单状态</td>#}
+                            <td class="w130">操作</td>
+                        </tr>
+                        {% for user_address in user_addresses %}
+                         <tr class="c">
+
+                            <td class="w111 adjust01">
+                                <span class="cb01">{{ user_address.consignee }}</span><br>
+                            </td>
+
+                            <td class="w87 adjust01">
+                                <div>{{ user_address.phone }}</div>
+                            </td>
+                            <td class="w87 h70">
+                                <span class="c888">
+                                    {{ user_address.province }} {{ user_address.city }} {{ user_address.country }} {{ user_address.street }} {{ user_address.detail_address }}
+                                </span>
+                            </td>
+                            <td class="w130 adjust03">
+                                <a class="c0e7" target="_blank" href="#">编辑</a>
+                                <span>|</span>
+                                <a class="c0e7" href="{% url 'bookapp:address_drop' user_address.id %}">删除</a>
+                                                                                                                                    <br>
+                            </td>
+                         </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
+</div>
+{#    <!-- 便利提醒 End -->#}
+{##}
+{#    <div class="clear"></div>#}
+{#        <!-- order表单 Begin -->#}
+{#    <div class="odrTab">#}
+{#        <div class="ot_top">#}
+{#            <form action="">#}
+{#                <div class="left">#}
+{#                    <select name="datetime">#}
+{#                        <option selected="selected" value="">所有订单</option>#}
+{#                        <option value="1">近一个月订单</option>#}
+{#                        <option value="2">近三个月订单</option>#}
+{#                        <option value="3">近一年订单</option>#}
+{#                    </select>#}
+{#                    <select name="order_status">#}
+{#                                                <option value="">全部状态</option>#}
+{#                                                    <option value="1">未确认</option>#}
+{#                                                    <option value="2">确认中</option>#}
+{#                                                    <option value="3">已确认</option>#}
+{#                                                    <option value="4">待发货</option>#}
+{#                                                    <option value="5">分单发货中</option>#}
+{#                                                    <option value="6">已发货</option>#}
+{#                                                    <option value="7">已取消</option>#}
+{#                                                    <option value="8">待支付</option>#}
+{#                                            </select>#}
+{##}
+{#                </div>#}
+{#                <div class="right">#}
+{#                    &lt;订单编号：&gt;<!--订单编号：-->#}
+{#                    <input type="text" class="txt" name="order_id" value="" onfocus="javascript:$(this).val(&#39;&#39;);">#}
+{#                    <input type="submit" class="lookup" value="查询">#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+
+{#    <!-- order表单 End -->#}
+{##}
+{#    <!-- 翻页 Begin -->#}
+{#        <!-- 翻页 End -->#}
+{##}
+{#</div>#}
+
+
+
+<!-- 左边菜单 Begin -->
+<div class="leftArea">
+    <div class="leftArea">
+    	<!-- LOGO -->
+{#    <div class="u__mine">#}
+{#    	<a href="http://user.wbiao.cn/" style="display: block; height: 100%;"></a>#}
+{#    </div>#}
+        <div style="width: 180px;height: 40px;background: #2176c6;margin: 0 auto;text-align: center;display: table">
+            <span style="display: table-cell;vertical-align: middle;color: white">
+                <span style="font-size: 16px;">我的书籍&nbsp;</span>
+                MY BOOKS
+            </span>
+        </div>
+    <div class="floor">
+        <div class="t"><i class="u__trade"></i><font class="f_fixed">交易管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i ></i><a href="{% url 'bookapp:member_center' %}"  title="我的订单"  rel="nofollow">我的订单 (<span class="cb01">{{ book_amount }}</span>)</a></li>
+                <!--<li><i></i><a href="#" title="我的预售" rel="nofollow">我的预售 (<span class="cb01">0</span>)</a></li>-->
+                <li><i></i><a href="{% url 'bookapp:member_address' %}" title="收货地址" rel="nofollow" class="ccf0">收货地址</a></li>
+                <!--<li><i></i><a href="#" title="礼品卡" rel="nofollow">礼品卡</a></li>-->
+                <!--<li style="border:0;"><i></i><a href="#" title="代金券/优惠券" rel="nofollow">代金券/优惠券</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="t"><i class="u__datum"></i><font class="f_fixed">账户管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a href="{% url 'bookapp:personal_data' %}" title="个人资料" rel="nofollow" >个人资料</a></li>
+                <li><i></i><a href="{% url 'bookapp:member_change_password' %}" title="修改密码" rel="nofollow">修改密码</a></li>
+                <!--<li><i></i><a  href="#" title="我的收藏" rel="nofollow">我的收藏</a></li>-->
+                <li><i></i><a  href="{% url 'bookapp:member_brow_history' %}" title="浏览历史" rel="nofollow">浏览历史</a></li>
+                <li><i></i><a  href="{% url 'bookapp:member_personality_analysis' %}" title="个性分析" rel="nofollow">个性分析</a></li>
+                <li style="border:0;"><i></i><a href="{% url 'bookapp:member_recommend_for_me' %}" title="为我推荐" rel="nofollow">为我推荐</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="floor">
+        <div class="t"><i class="u__integral"></i><font class="f_fixed">积分管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a  href="#" title="我的积分" rel="nofollow">我的积分</a></li>
+                <li><i></i><a  href="#" title="积分细则" rel="nofollow">积分细则</a></li>
+                <li style="border:0;"><i></i><a  href="#" title="推荐有礼" rel="nofollow">推荐有礼</a></li>
+            </ul>
+        </div>
+    </div>-->
+    <div class="floor">
+        <div class="t"><i class="u__service"></i><font class="f_fixed">消息管理</font></div>
+        <div class="c">
+            <ul>
+                <!--<li><i></i><a href="#" title="购买咨询" rel="nofollow">购买咨询</a></li>-->
+                <li><i></i><a href="{% url 'bookapp:member_comment' %}" title="我的评论" rel="nofollow">我的评论</a></li>
+{#                <li style="border:0;"><i></i><a href="#" title="我的消息" rel="nofollow">我的消息(<span class="cb01">0</span>)</a></li>#}
+                <!--<li style="border:0;"><i></i><a href="#" title="促销通知" rel="nofollow">促销通知</a></li>-->
+                                <li style="border:0;"><i></i><a href="{% url 'bookapp:member_information' %}" title="我的消息" rel="nofollow">我的消息(<span class="cb01">{{ information_len }}</span>)</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="t"><i class="u__star"></i><font class="f_fixed">书香盈袖会员</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a href="#" title="会员简介" rel="nofollow">会员简介</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="logout">
+        <a href="{% url 'user:logout' %}" class="c999">退出登录</a>
+    </div>
+</div></div>
+<!-- 左边菜单 End -->
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+<!-- Begin footer -->

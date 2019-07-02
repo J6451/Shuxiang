@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0096)http://cart.wbiao.cn/success?order_id=102338&payment_id=2&token=846a32919ddd22bffc6d85fa1781e2d6 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>订单提交成功_喜悦手表网</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/2.css' %}">
+<!--[if lte IE 6]>
+<![endif]-->
+</head>
+
+<body style="">
+<div id="member_info2"></div>
+<div id="header">
+    <div class="top">
+        <ul>
+            {#        <li id="member_info"><a href="#" title="登录" rel="nofollow">登录</a><span>&nbsp;|&nbsp;</span><a href="#" title="注册" rel="nofollow">注册</a></li>#}
+            {#        <li>&nbsp;|&nbsp;</li>#}
+            {#        <li><a href="#" rel="nofollow" title="我的订单">我的订单</a></li>#}
+            {#        <li>&nbsp;|&nbsp;</li>#}
+            {#        <li class="s__center"><a class="link_center" href="#" rel="nofollow" title="会员中心">会员中心&nbsp;<span class="s__arrow_red_down">&nbsp;</span></a>#}
+            {#            <div id="user_menu_list">#}
+            {#                <p>您好! 进入会员中心请先<a href="#" >&nbsp;登录&nbsp;</a>或<a href="#" >&nbsp;注册&nbsp;</a></p>#}
+            {#            </div>#}
+            {#        </li>#}
+            {#        <li>&nbsp;|&nbsp;</li>#}
+            {#        <li class="s__clearing"><div class="s__cart"><a href="#" rel="nofollow">去购物车结算&nbsp;<span class="s__arrow_red_down">&nbsp;</span></a></div></li>#}
+            <li class="s__center"><a class="link_center" href="{% url 'bookapp:member_center' %}" rel="nofollow"
+                                     style="color: #cf0000">会员中心&nbsp;<span class="s__arrow_red_down">&nbsp;</span></a>
+            </li>
+        </ul>
+    </div>
+    <div class="w750 mt30 fr">
+        <ul class="m_0_23 inline w464 fr li_left li">
+            <li class="w14 h14 circle bp_0-36"></li>
+            <li class="w136 h8 mt6 bt_2_f1f">&nbsp;</li>
+            <li class="w14 h14 circle bp_0-36"></li>
+            <li class="w136 h8 mt6 bt_2_f1f">&nbsp;</li>
+            <li class="w14 h14 circle bp_0-36"></li>
+            <li class="w136 h8 mt6 bt_2_f1f">&nbsp;</li>
+            <li class="w14 h14 circle bp_0-19"></li>
+        </ul>
+        <ul class="w510 mt10 fr li_left li">
+            <li class="w60 bold f14 c666">选购商品</li>
+            <li class="w90">&nbsp;</li>
+            <li class="w60 bold f14 c666">提交订单</li>
+            <li class="w90">&nbsp;</li>
+            <li class="w60 bold f14 c666">支付订单</li>
+            <li class="w90">&nbsp;</li>
+            <li class="w60 bold f14 cd00">等待签收</li>
+        </ul>
+    </div>
+    <h1><br/><img src="{% static 'css/images/LOGO.png' %}"/></h1>
+</div>
+
+
+<div id="main">
+    <div class="w930 m0a mt50">
+        <dl class="bgf6f br10 f14 p20">
+            <dt class="bold f22 cd00">订单提交成功！</dt>
+            <dd class="ml5 mt15 c777">感谢您订购喜悦手表网商品；</dd>
+            <dd class="ml5 mt10 c777">请你确保手机联系畅通，我们将稍后和你本人联系；</dd>
+            <dd class="ml5 mt10 c777">订单确认后，我们将第一时间为您安排发货！</dd>
+        </dl>
+        <div class="mt30 ml10">
+            <a id="login_now" href="{% url 'bookapp:member_center' %}" class="btnd00 w212 h40 f18 bold tc inbl fancybox.iframe">查看所有订单</a>
+        </div>
+    </div>
+</div>
+
+
+{#</div>#}
+
+
+<div id="footer">
+    <div class="info">
+        <p class="copyright"> 书香盈袖 版权所有
+
+        </p>
+    </div>
+</div>
+</body>
+</html>

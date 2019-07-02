@@ -1,0 +1,70 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ class_name }}</title>
+{% endblock %}
+
+{% block content %}
+
+
+<!-- End header -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/hot.css' %}" />
+<div id="main">
+
+    <div class="hot_goods_list">
+    	<div class="context">
+            <ul>
+                {% for class_book in class_books %}
+
+
+                <li><span class=""></span> <a href="{% url 'bookapp:detail' class_book.id %}" target="_parent" class="img">
+                    <img src="{{ class_book.image.url }}" width="200" height="250"/></a>
+                    <p><b>{{ class_book.book_name }}</b><br>
+                        {# 特惠价 #}
+{#                        <u></u>#}
+
+                        <ins>{{ class_book.price }}（书豆）</ins>
+{#                        <del>原价：100</del>#}
+                        <br>
+                        <span class="cmt">已被查看<i>{{ class_book.check_number }}</i>次</span></p>
+
+                    <a class="btn btn-danger" style=" width:96px; height:36px;margin-left:100px;" href="{% url 'bookapp:book_borrow' class_book.id %}">立即借阅</a>
+                </li>
+                {% endfor %}
+
+
+            </ul>
+    	</div>
+        <br>
+  		<div class="fr" style="width: 100%;">
+    	
+            <div id="page_nav" style="float: right;"> 
+            	<span>一共有&nbsp;{{ class_books.paginator.count }}&nbsp;条记录&nbsp;&nbsp;</span>
+                {% if class_books.has_previous %}
+{#                    <span class="pre">#}
+                        <a href="?page={{ class_books.previous_page_number }}">上一页
+                            <span></span>
+                        </a>
+{#                    </span>&nbsp;#}
+                {% endif %}
+
+{#	      		<span class="cur">1</span>&nbsp;#}
+
+{#	      		<span>&hellip;</span>&nbsp;#}
+                    {% if class_books.has_next %}
+	      		    <a href="?page={{ class_books.next_page_number }}" class="next">下一页
+	      			    <span></span>
+	      		    </a>&nbsp;
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Begin footer -->
+{% endblock %}

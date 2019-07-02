@@ -1,0 +1,307 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>我的订单</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+{#<script src="Script/saved_resource"></script>#}
+<link rel="stylesheet" href="{% static 'css/user.css' %}" type="text/css" media="screen, projection">
+<script type="text/javascript" src="{% static 'Script/user.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+
+<div id="main">
+<div class="position">
+    <a href="{% url 'bookapp:index' %}"><strong>首页</strong></a>
+    <i>&gt;</i>
+    <a href="{% url 'bookapp:member_center' %}" target="_parent" class="c0e7">会员中心</a>
+    <i>&gt;</i>
+    <span>个人资料</span>
+</div>
+
+
+    <div class="rightArea">
+    <!-- 便利提醒 Begin -->
+        <div class="prompt">
+            <div class="pr_top">
+                <b class="tit">个人资料</b>
+                <!-- 联系客服 -->
+    {#            <div id="contact_kf_div" class="u__kf">#}
+    {#            </div>#}
+            </div>
+
+        </div>
+    <!-- 便利提醒 End -->
+
+{#    <div class="clear"></div>#}
+        <!-- order表单 Begin -->
+        <div class="account">
+        <div class="hisOrd">
+                    <table class="table">
+                        <tr>
+                            <td>姓名</td>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>性别</td>
+                            <td>
+                                {% ifequal book_user.sex '1' %}
+                                    男
+                                {% else %}
+                                    女
+                                {% endifequal %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年龄</td>
+                            <td>
+                                {{ book_user.age }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>邮箱</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>手机号</td>
+                            <td>{{ book_user.phone }}</td>
+                        </tr>
+                        <tr>
+                            <td>手机号是否激活</td>
+                            <td>
+                                {% if book_user.is_phone %}
+                                    是
+                                {% else %}
+                                    否&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="#" style="color: red">激活</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>邮箱是否激活</td>
+                            <td>
+                                {% if book_user.is_email %}
+                                    是
+                                {% else %}
+                                    否&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="#" style="color: red">激活</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>余额</td>
+                            <td>{{ book_bean_credit.money }}（书香豆）</td>
+                        </tr>
+                        <tr>
+                            <td>信用值</td>
+                            <td>{{ book_bean_credit.number }}（点）</td>
+                        </tr>
+                        <tr>
+                            <td>可借书本总量</td>
+                            <td>{{ book_bean_credit.borrow_all }}（本）</td>
+                        </tr>
+                        <tr>
+                            <td>借阅中的书本数量</td>
+                            <td>{{ book_bean_credit.borrowed }}（本）</td>
+                        </tr>
+                        <tr>
+                            <td>可借书本最大时长</td>
+                            <td>{{ book_bean_credit.borrow_max_time }}（天）</td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+
+{#<div class="rightArea">#}
+{#    <!-- 便利提醒 Begin -->#}
+{#    <div class="prompt">#}
+{#        <div class="pr_top">#}
+{#            <b class="tit">我的订单</b>#}
+{#            <!-- 联系客服 -->#}
+{#            <div id="contact_kf_div" class="u__kf">     	#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#    <!-- 便利提醒 End -->#}
+{##}
+{#    <div class="clear"></div>#}
+{#        <!-- order表单 Begin -->#}
+{#    <div class="odrTab">#}
+{#        <div class="ot_top">#}
+{#            <form action="">#}
+{#                <div class="left">#}
+{#                    <select name="datetime">#}
+{#                        <option selected="selected" value="">所有订单</option>#}
+{#                        <option value="1">近一个月订单</option>#}
+{#                        <option value="2">近三个月订单</option>#}
+{#                        <option value="3">近一年订单</option>#}
+{#                    </select>#}
+{#                    <select name="order_status">#}
+{#                                                <option value="">全部状态</option>#}
+{#                                                    <option value="1">未确认</option>#}
+{#                                                    <option value="2">确认中</option>#}
+{#                                                    <option value="3">已确认</option>#}
+{#                                                    <option value="4">待发货</option>#}
+{#                                                    <option value="5">分单发货中</option>#}
+{#                                                    <option value="6">已发货</option>#}
+{#                                                    <option value="7">已取消</option>#}
+{#                                                    <option value="8">待支付</option>#}
+{#                                            </select>#}
+{##}
+{#                </div>#}
+{#                <div class="right">#}
+{#                    &lt;订单编号：&gt;<!--订单编号：-->#}
+{#                    <input type="text" class="txt" name="order_id" value="" onfocus="javascript:$(this).val(&#39;&#39;);">#}
+{#                    <input type="submit" class="lookup" value="查询">#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="account">#}
+{#        <div class="hisOrd">#}
+{#                <table class="ho_middle" cellpadding="0" cellspacing="0">#}
+{#                    <tbody>#}
+{#                        <tr class="t">#}
+{#                            <td class="w120">订单编号</td>#}
+{#                            <td class="w186">订单商品</td>#}
+{#                            <td class="w75">收货人</td>#}
+{#                            <td class="w111">订单金额</td>#}
+{#                            <td class="w87">下单时间</td>#}
+{#                            <td class="w87">订单状态</td>#}
+{#                            <td class="w130">操作</td>#}
+{#                        </tr>#}
+{#                        <tr class="c">#}
+{#                            <td class="w120 h70"><a class="c0e7" target="_blank" href="#">2014041284656</a></td>#}
+{#                            <td class="w186 adjust02" style="text-align:left;">#}
+{#                                <a target="_blank" title="瑞士爱宝时（EPOS）-Passion系列 3412.183.24.30.27 机械男表" href="#">#}
+{#                                    <img alt="瑞士爱宝时（EPOS）-Passion系列 3412.183.24.30.27 机械男表" src="images/3412_183_24_30_27_27885.jpg">#}
+{#                                </a>#}
+{#                            </td>#}
+{#                            <td class="w75 h70"><font class="c333">小新</font></td>#}
+{#                            <td class="w111 adjust01">#}
+{#                                <font class="cb01">￥9500.00</font><br>#}
+{#                                                                                            </td>#}
+{#                            <td class="w87 adjust01">#}
+{#                                <div>2014-04-12 17:03:34</div>#}
+{#                            </td>#}
+{#                            <td class="w87 h70"><font class="c888">确认中</font></td>#}
+{#                            <td class="w130 adjust03">#}
+{#                                <a class="c0e7" target="_blank" href="#">查看</a>#}
+{#                                <span>|</span>#}
+{#                                                        <a class="c0e7" href="#">评论</a>#}
+{#                                                        <span>|</span>#}
+{#                                <a class="c0e7" href="javascript:void(0);" style="padding: 0px; margin: 0px; display: inline-block; width: 28px;">#}
+{#                                                            <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="float:none;" data="{&#39;pic&#39;:&#39;http://imgd12.wbiao.cn/201303/01/3412_183_24_30_27_27885.jpg&#39;, &#39;text&#39;:&#39;瑞士爱宝时（EPOS）-Passion系列 3412.183.24.30.27 机械男表;  喜悦手表网（www.wbiao.cn）专注经营欧米茄、浪琴、赫柏林、DAVOSA等原装正品中高档世界名表，支持信用卡分期付款、尊享全球联保服务！买手表，上喜悦手表网！400-883-2688！&#39;, &#39;url&#39;:&#39;http://www.wbiao.cn/epos-g25523.html&#39;, &#39;wbUid&#39;:1834746210, &#39;snsKey&#39;:{&#39;tsina&#39;:&#39;2617921517&#39;,&#39;tqq&#39;:&#39;221680&#39;} }">#}
+{#                                        <span class="bds_more2">分享</span>#}
+{#                                    </div>#}
+{#                                                        </a>#}
+{#                                                                    <span>|</span>#}
+{#                                    <a class="cb01" href="#">支付</a>#}
+{#                                                                                                                                    <br>#}
+{#                                <a href="javascript:void(0);" class="c0e7" onclick="javascript:NTKF.im_openInPageChat(&#39;kf_9988_1342405770356&#39;);_gaq.push([&#39;_trackEvent&#39;,&#39;user&#39;, &#39;shouhou&#39;, location.href]);">申请返修/退换货</a>#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    </tbody>#}
+{#                </table>#}
+{#        </div>#}
+{#    </div>#}
+{#    <!-- order表单 End -->#}
+{##}
+{#    <!-- 翻页 Begin -->#}
+{#        <!-- 翻页 End -->#}
+{##}
+{#</div>#}
+
+
+
+<!-- 左边菜单 Begin -->
+<div class="leftArea">
+    <div class="leftArea">
+    	<!-- LOGO -->
+{#    <div class="u__mine">#}
+{#    	<a href="http://user.wbiao.cn/" style="display: block; height: 100%;"></a>#}
+{#    </div>#}
+        <div style="width: 180px;height: 40px;background: #2176c6;margin: 0 auto;text-align: center;display: table">
+            <span style="display: table-cell;vertical-align: middle;color: white">
+                <span style="font-size: 16px;">我的书籍&nbsp;</span>
+                MY BOOKS
+            </span>
+        </div>
+    <div class="floor">
+        <div class="t"><i class="u__trade"></i><font class="f_fixed">交易管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i ></i><a href="{% url 'bookapp:member_center' %}"  title="我的订单"  rel="nofollow">我的订单 (<span class="cb01">{{ book_amount }}</span>)</a></li>
+                <!--<li><i></i><a href="#" title="我的预售" rel="nofollow">我的预售 (<span class="cb01">0</span>)</a></li>-->
+                <li><i></i><a href="{% url 'bookapp:member_address' %}" title="收货地址" rel="nofollow">收货地址</a></li>
+                <!--<li><i></i><a href="#" title="礼品卡" rel="nofollow">礼品卡</a></li>-->
+                <!--<li style="border:0;"><i></i><a href="#" title="代金券/优惠券" rel="nofollow">代金券/优惠券</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="t"><i class="u__datum"></i><font class="f_fixed">账户管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a href="{% url 'bookapp:personal_data' %}" title="个人资料" rel="nofollow" class="ccf0">个人资料</a></li>
+                <li><i></i><a href="{% url 'bookapp:member_change_password' %}" title="修改密码" rel="nofollow">修改密码</a></li>
+                <!--<li><i></i><a  href="#" title="我的收藏" rel="nofollow">我的收藏</a></li>-->
+                <li><i></i><a  href="{% url 'bookapp:member_brow_history' %}" title="浏览历史" rel="nofollow">浏览历史</a></li>
+                <li><i></i><a  href="{% url 'bookapp:member_personality_analysis' %}" title="个性分析" rel="nofollow">个性分析</a></li>
+                <li style="border:0;"><i></i><a href="{% url 'bookapp:member_recommend_for_me' %}" title="为我推荐" rel="nofollow">为我推荐</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="floor">
+        <div class="t"><i class="u__integral"></i><font class="f_fixed">积分管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a  href="#" title="我的积分" rel="nofollow">我的积分</a></li>
+                <li><i></i><a  href="#" title="积分细则" rel="nofollow">积分细则</a></li>
+                <li style="border:0;"><i></i><a  href="#" title="推荐有礼" rel="nofollow">推荐有礼</a></li>
+            </ul>
+        </div>
+    </div>-->
+    <div class="floor">
+        <div class="t"><i class="u__service"></i><font class="f_fixed">消息管理</font></div>
+        <div class="c">
+            <ul>
+                <!--<li><i></i><a href="#" title="购买咨询" rel="nofollow">购买咨询</a></li>-->
+                <li><i></i><a href="{% url 'bookapp:member_comment' %}" title="我的评论" rel="nofollow">我的评论</a></li>
+{#                <li style="border:0;"><i></i><a href="#" title="我的消息" rel="nofollow">我的消息(<span class="cb01">0</span>)</a></li>#}
+                                <li style="border:0;"><i></i><a href="{% url 'bookapp:member_information' %}" title="我的消息" rel="nofollow">我的消息(<span class="cb01">{{ information_len }}</span>)</a></li>
+
+                <!--<li style="border:0;"><i></i><a href="#" title="促销通知" rel="nofollow">促销通知</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="t"><i class="u__star"></i><font class="f_fixed">书香盈袖会员</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a href="#" title="会员简介" rel="nofollow">会员简介</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="logout">
+        <a href="{% url 'user:logout' %}" class="c999">退出登录</a>
+    </div>
+</div></div>
+<!-- 左边菜单 End -->
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+<!-- Begin footer -->

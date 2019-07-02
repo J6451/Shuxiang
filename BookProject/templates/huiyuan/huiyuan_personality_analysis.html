@@ -1,0 +1,302 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>个性分析</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+{#<script src="Script/saved_resource"></script>#}
+<link rel="stylesheet" href="{% static 'css/user.css' %}" type="text/css" media="screen, projection">
+<script type="text/javascript" src="{% static 'Script/user.js' %}"></script>
+    <script src="{% static 'Script/echarts.min.js' %}"></script>
+    <script src="{% static 'Script/echarts-wordcloud.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+
+
+<div id="main">
+<div class="position">
+    <a href="{% url 'bookapp:index' %}"><strong>首页</strong></a>
+    <i>&gt;</i>
+    <a href="{% url 'bookapp:member_center' %}" target="_parent" class="c0e7">会员中心</a>
+    <i>&gt;</i>
+    <span>个性分析</span>
+</div>
+<div class="rightArea">
+    <!-- 便利提醒 Begin -->
+    <div class="prompt">
+        <div class="pr_top">
+            <b class="tit">个性分析</b>
+            <!-- 联系客服 -->
+{#            <div id="contact_kf_div" class="u__kf">     	#}
+{#            </div>#}
+        </div>
+
+    </div>
+    <!-- 便利提醒 End -->
+
+    <div class="clear"></div>
+        <!-- order表单 Begin -->
+
+    <div class="account">
+        <div class="hisOrd" id="echarts_1" style="width: 800px;height: 300px;float: left;">
+        </div>
+        <div class="hisOrd" id="echarts_2" style="width: 400px;height: 300px;float: left"></div>
+        <div class="hisOrd" id="echarts_3" style="width: 400px;height: 300px;float: left"></div>
+        <input  id="comment_keywords" hidden value='{{ comment_keywords }}'/>
+{#        <div class="hisOrd" id="echarts_4" style="width: 400px;height: 300px;float: left"></div>#}
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+        var myChart_1 = echarts.init(document.getElementById('echarts_1'));
+        var myChart_2 = echarts.init(document.getElementById('echarts_2'));
+        var myChart_3 = echarts.init(document.getElementById('echarts_3'));
+        {#var myChart_4 = echarts.init(document.getElementById('echarts_4'));#}
+        var myDate = new Date();
+        var Date_1 = new Date(myDate.getTime() - 24*60*60*1000);
+        var Date_2 = new Date(myDate.getTime() - 2*24*60*60*1000);
+        var Date_3 = new Date(myDate.getTime() - 3*24*60*60*1000);
+        var Date_4 = new Date(myDate.getTime() - 4*24*60*60*1000);
+        var Date_5 = new Date(myDate.getTime() - 5*24*60*60*1000);
+        var Date_6 = new Date(myDate.getTime() - 6*24*60*60*1000);
+        var Date_7 = new Date(myDate.getTime() - 7*24*60*60*1000);
+
+
+        var now_date = myDate.toLocaleDateString();
+        var date_1 = Date_1.toLocaleDateString();
+        var date_2 = Date_2.toLocaleDateString();
+        var date_3 = Date_3.toLocaleDateString();
+        var date_4 = Date_4.toLocaleDateString();
+        var date_5 = Date_5.toLocaleDateString();
+        var date_6 = Date_6.toLocaleDateString();
+        var date_7 = Date_7.toLocaleDateString();
+
+        // 指定图表的配置项和数据
+        var option_1 = {
+            title: {
+                text: '最近七天浏览量'
+            },
+            tooltip: {},
+            {#dataZoom:[#}
+            {#    {   // 这个dataZoom组件，默认控制x轴。#}
+            {#        type:'slider',// 这个 dataZoom 组件是 slider 型 dataZoom 组件#}
+            {#        start:10,// 左边在 10% 的位置。#}
+            {#        end:90// 右边在 90% 的位置。#}
+            {#    },#}
+            {#    {   // 这个dataZoom组件，也控制x轴。#}
+            {#        type: 'inside', // 这个 dataZoom 组件是 inside 型 dataZoom 组件#}
+            {#        start: 10,      // 左边在 10% 的位置。#}
+            {#        end: 90         // 右边在 90% 的位置。#}
+            {#    }#}
+            {#],#}
+            xAxis: {
+                type: 'category',
+                data: [date_6,date_5,date_4,date_3,date_2,date_1, now_date]
+            },
+            yAxis: {
+                type:'value'
+            },
+            series: [{
+                 data: [
+
+                     {{ dates.date_6 }},
+                     {{ dates.date_5 }},
+                     {{ dates.date_4 }},
+                     {{ dates.date_3 }},
+                     {{ dates.date_2 }},
+                     {{ dates.date_1 }},
+                     {{ dates.today }}
+                 ],
+                type: 'line'
+            }]
+        };
+
+        var option_2 = {
+            title:  {
+                text: '类别访问量'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data:['Python','Java','Linux','MySQL','数学','物理','化学','自然科普','外语','哲学','心理学']
+            },
+            series: [
+                {
+                    name:'访问来源',
+                    type:'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:{{ classify.Python }}, name:'Python'},
+                        {value:{{ classify.Java }}, name:'Java'},
+                        {value:{{ classify.Linux }}, name:'Linux'},
+                        {value:{{ classify.MySQL }}, name:'MySQL'},
+                        {value:{{ classify.math }}, name:'数学'},
+                        {value:{{ classify.physics }}, name:'物理'},
+                        {value:{{ classify.chemistry }}, name:'化学'},
+                        {value:{{ classify.natural_science }}, name:'自然科普'},
+                        {value:{{ classify.foreign_language }}, name:'外语'},
+                        {value:{{ classify.philosophy }}, name:'哲学'},
+                        {value:{{ classify.psychology }}, name:'心理学'},
+                    ]
+                }
+            ]
+        };
+        {#for (i=0;i<{{ comment_keywords }}.length;i++){#}
+        {##}
+        {#    }#}
+        var value = $('#comment_keywords').val();
+        var reg = new RegExp("\'","g");
+        var new_value = value.replace(reg,'\"');
+        var value_1 = JSON.parse(new_value);
+        {#console.log(value_1);#}
+        var data = {
+            'value': value_1
+        };
+        var option_3 = {
+            title: {
+                text: '评论关键字'
+            },
+            series: [
+                {
+                    type: 'wordCloud',
+                    gridSize: 2,
+                    sizeRange: [12, 50],
+                    rotationRange: [-90, 90],
+                    shape: 'pentagon',
+                    textStyle: {
+                    normal: {
+                        color: function () {
+                            return 'rgb(' + [
+                                Math.round(Math.random() * 255),
+                                Math.round(Math.random() * 255),
+                                Math.round(Math.random() * 255)
+                            ].join(',') + ')';
+                            }
+                            },
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowColor: '#333'
+                    }
+                },
+                    data: data.value
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart_1.setOption(option_1);
+        myChart_2.setOption(option_2);
+        myChart_3.setOption(option_3);
+        {#myChart_4.setOption(option_1);#}
+
+        </script>
+    </div>
+</div>
+
+<!-- 左边菜单 Begin -->
+<div class="leftArea">
+    <div class="leftArea">
+    	<!-- LOGO -->
+{#    <div class="u__mine">#}
+{#    	<a href="http://user.wbiao.cn/" style="display: block; height: 100%;"></a>#}
+{#    </div>#}
+        <div style="width: 180px;height: 40px;background: #2176c6;margin: 0 auto;text-align: center;display: table">
+            <span style="display: table-cell;vertical-align: middle;color: white">
+                <span style="font-size: 16px;">我的书籍&nbsp;</span>
+                MY BOOKS
+            </span>
+        </div>
+    <div class="floor">
+        <div class="t"><i class="u__trade"></i><font class="f_fixed">交易管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i ></i><a href="{% url 'bookapp:member_center' %}"  title="我的订单" class="ccf0" rel="nofollow">我的订单 (<span class="cb01">{{ book_amount }}</span>)</a></li>
+                <!--<li><i></i><a href="#" title="我的预售" rel="nofollow">我的预售 (<span class="cb01">0</span>)</a></li>-->
+                <li><i></i><a href="{% url 'bookapp:member_address' %}" title="收货地址" rel="nofollow">收货地址</a></li>
+                <!--<li><i></i><a href="#" title="礼品卡" rel="nofollow">礼品卡</a></li>-->
+                <!--<li style="border:0;"><i></i><a href="#" title="代金券/优惠券" rel="nofollow">代金券/优惠券</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="t"><i class="u__datum"></i><font class="f_fixed">账户管理</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a href="{% url 'bookapp:personal_data' %}" title="个人资料" rel="nofollow">个人资料</a></li>
+                <li><i></i><a href="{% url 'bookapp:member_change_password' %}" title="修改密码" rel="nofollow">修改密码</a></li>
+                <!--<li><i></i><a  href="#" title="我的收藏" rel="nofollow">我的收藏</a></li>-->
+                <li><i></i><a  href="{% url 'bookapp:member_brow_history' %}" title="浏览历史" rel="nofollow">浏览历史</a></li>
+                <li><i></i><a  href="{% url 'bookapp:member_personality_analysis' %}" title="个性分析" rel="nofollow">个性分析</a></li>
+                <li style="border:0;"><i></i><a href="{% url 'bookapp:member_recommend_for_me' %}" title="为我推荐" rel="nofollow">为我推荐</a></li>
+            </ul>
+        </div>
+    </div>
+{#    <div class="floor">#}
+{#        <div class="t"><i class="u__integral"></i><font class="f_fixed">积分管理</font></div>#}
+{#        <div class="c">#}
+{#            <ul>#}
+{#                <li><i></i><a  href="#" title="我的积分" rel="nofollow">我的积分</a></li>#}
+{#                <li><i></i><a  href="#" title="积分细则" rel="nofollow">积分细则</a></li>#}
+{#                <li style="border:0;"><i></i><a  href="#" title="推荐有礼" rel="nofollow">推荐有礼</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="floor">
+        <div class="t"><i class="u__service"></i><font class="f_fixed">消息管理</font></div>
+        <div class="c">
+            <ul>
+                <!--<li><i></i><a href="#" title="购买咨询" rel="nofollow">购买咨询</a></li>-->
+                <li><i></i><a href="{% url 'bookapp:member_comment' %}" title="我的评论" rel="nofollow">我的评论</a></li>
+                                <li style="border:0;"><i></i><a href="{% url 'bookapp:member_information' %}" title="我的消息" rel="nofollow">我的消息(<span class="cb01">{{ information_len }}</span>)</a></li>
+
+{#                <li style="border:0;"><i></i><a href="#" title="我的消息" rel="nofollow">我的消息(<span class="cb01">0</span>)</a></li>#}
+                <!--<li style="border:0;"><i></i><a href="#" title="促销通知" rel="nofollow">促销通知</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="floor">
+        <div class="t"><i class="u__star"></i><font class="f_fixed">书香盈袖会员</font></div>
+        <div class="c">
+            <ul>
+                <li><i></i><a href="#" title="会员简介" rel="nofollow">会员简介</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="logout">
+        <a href="{% url 'user:logout' %}" class="c999">退出登录</a>
+    </div>
+</div></div>
+<!-- 左边菜单 End -->
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+<!-- Begin footer -->

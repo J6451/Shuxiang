@@ -1,0 +1,447 @@
+<html>
+<!-- saved from url=(0096)http://cart.wbiao.cn/success?order_id=102338&payment_id=2&token=846a32919ddd22bffc6d85fa1781e2d6 -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>订单提交成功</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+{% load static %}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'css/2.css' %}">
+<script src="{% static 'Script/jquery.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="{% static 'Script/xcConfirm.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/xcConfirm.css' %}">
+
+</head>
+
+<body style="">
+<div id="member_info2"></div>
+<div id="header">
+    <div class="top">
+    <ul>
+{#        <li id="member_info"><a href="#" title="登录" rel="nofollow">登录</a><span>&nbsp;|&nbsp;</span><a href="#" title="注册" rel="nofollow">注册</a></li>#}
+{#        <li>&nbsp;|&nbsp;</li>#}
+{#        <li><a href="#" rel="nofollow" title="我的订单">我的订单</a></li>#}
+{#        <li>&nbsp;|&nbsp;</li>#}
+        <li class="s__center"><a class="link_center" href="{% url 'bookapp:member_center' %}" rel="nofollow" style="color: #cf0000">会员中心&nbsp;<span class="s__arrow_red_down">&nbsp;</span></a>
+{#            <div id="user_menu_list">#}
+{#                <p>您好! 进入会员中心请先<a href="#" >&nbsp;登录&nbsp;</a>或<a href="#" >&nbsp;注册&nbsp;</a></p>#}
+{#            </div>#}
+        </li>
+{#        <li>&nbsp;|&nbsp;</li>#}
+{#        <li class="s__clearing"><div class="s__cart"><a href="#" rel="nofollow">去购物车结算&nbsp;<span class="s__arrow_red_down">&nbsp;</span></a></div></li>#}
+    </ul>
+    </div> 
+    <div class="w750 mt30 fr">
+        <ul class="m_0_23 inline w464 fr li_left li">
+            <li class="w14 h14 circle bp_0-36"></li>
+            <li class="w136 h8 mt6 bt_2_f1f">&nbsp;</li>
+            <li class="w14 h14 circle bp_0-36"></li>
+            <li class="w136 h8 mt6 bt_2_f1f">&nbsp;</li>
+            <li class="w14 h14 circle bp_0-36"></li>
+            <li class="w136 h8 mt6 bt_2_f1f">&nbsp;</li>
+            <li class="w14 h14 circle bp_0-19"></li>
+        </ul>
+        <ul class="w510 mt10 fr li_left li">
+            <li class="w60 bold f14 c666">选购商品</li>
+            <li class="w90">&nbsp;</li>
+            <li class="w60 bold f14 cd00">提交订单</li>
+            <li class="w90">&nbsp;</li>
+            <li class="w60 bold f14 c666">支付订单</li>
+            <li class="w90">&nbsp;</li>
+            <li class="w60 bold f14 c666">等待签收</li>
+        </ul>
+    </div>
+    <h1><br /><img src="{% static 'css/images/LOGO.png' %}" />
+        </h1>
+</div>
+
+<style>
+#main{overflow: visible;}
+input.error{
+    border:1px solid #d00000;
+}
+label.error{
+    position: absolute;
+    top: -15px;
+    left: 5px;    
+    color: #fff !important;
+    background-color: #d00000;
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;    
+    text-align: center;
+    display: block;    
+}
+</style>
+
+<div id="main">
+    <form action="" method="post">
+    {% csrf_token %}
+        <div class="mt30">
+            <div><br>
+                <b class="f14">收货信息：</b>
+                <span class="c999">我们将选用最专业的快递公司联邦快递、顺丰快递、EMS等</span>
+                <span style="float: right;"><a href="{% url 'bookapp:member_address' %}" style="color: #b01330;">添加新地址</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </div>
+
+
+            <div class="mt20 bl_3_f6f">
+                <ul id="addrIfr" class="w970 m0a f14 c333">
+    {#                            <div class="clear"></div>#}
+
+
+                    <div>
+
+                            <table class="table table-bordered" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr class="t">
+                                        <td class="w75">选择</td>
+                                        <td class="w75">收货人</td>
+                                        <td class="w120">手机号</td>
+                                        <td class="w186">收货地址</td>
+                                    </tr>
+                                    {% for user_address in user_addresses %}
+                                     <tr class="c">
+                                        <td>
+                                            <label for=""><input type="radio" name="address_id" value="{{ user_address.id }}" required></label>
+                                        </td>
+                                        <td class="w111 adjust01">
+                                            <span class="cb01">{{ user_address.consignee }}</span><br>
+                                        </td>
+
+                                        <td class="w87 adjust01">
+                                            <div>{{ user_address.phone }}</div>
+                                        </td>
+                                        <td class="w87 h70">
+                                            <span class="c888">
+                                                {{ user_address.province }} {{ user_address.city }} {{ user_address.country }} {{ user_address.street }} {{ user_address.detail_address }}
+                                            </span>
+                                        </td>
+
+                                     </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+
+    {#                <div class="rel inbl">#}
+    {#                    <a href="javascript:;" id="confirm" class="w80 h26 f14 bold bgd00 inbl tc cfff mr15">保存</a>#}
+    {#                    <a href="javascript:;" id="cancel" class="w80 h26 f14 bold bgccc inbl tc cfff">取消</a>#}
+    {#                </div>#}
+
+                </ul>
+            </div>
+        </div>
+        {# 收货信息结束 #}
+
+        {#  借阅详情开始  #}
+
+       <div class="mt30">
+            <div><br>
+                <b class="f14">借阅详情：</b>
+    {#            <span class="c999">我们将选用最专业的快递公司联邦快递、顺丰快递、EMS等</span>#}
+    {#            <span style="float: right;"><a href="" style="color: #b01330;">添加新地址</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>#}
+            </div>
+
+
+            <div class="mt20 bl_3_f6f">
+                <ul id="addrIfr" class="w970 m0a f14 c333">
+                    <div>
+
+                        <label for="">开始时间：<input type="date" readonly="readonly" id="start_date" name="start_date"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label for="">结束时间：<input type="date" id="end_date" name="end_date" required></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        （您能借阅的最大时长为<span style="color: red">{{ borrow_max_time }}</span>天）
+                        <input type="text" value="{{ borrow_max_time }}" id="max_date" hidden>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+
+        {#  借阅详情结束  #}
+        <script type="text/javascript">
+            $(function(){
+                // 时间转换函数
+                Date.prototype.format = function(fmt) {
+                     var o = {
+                        "M+" : this.getMonth()+1,                 //月份
+                        "d+" : this.getDate(),                    //日
+                        "h+" : this.getHours(),                   //小时
+                        "m+" : this.getMinutes(),                 //分
+                        "s+" : this.getSeconds(),                 //秒
+                        "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                        "S"  : this.getMilliseconds()             //毫秒
+                    };
+                    if(/(y+)/.test(fmt)) {
+                            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+                    }
+                     for(var k in o) {
+                        if(new RegExp("("+ k +")").test(fmt)){
+                             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                         }
+                     }
+                    return fmt;
+                };
+
+                function addDate(date, days) {
+                     var date_1 = new Date(date);
+                   date_1.setDate(date_1.getDate() + days);
+                    var month = date_1.getMonth() + 1;
+                    var day = date_1.getDate();
+                    var mm = "'" + month + "'";
+                    var dd = "'" + day + "'";
+                   //单位数前面加0
+                   if(mm.length == 3) {
+                       month = "0" + month;
+                    }
+                   if(dd.length == 3) {
+                        day = "0" + day;
+                  }
+
+                   var time = date_1.getFullYear() + "-" + month + "-" + day;
+                   return time;
+               }
+
+
+                // 设置开始时间为今天
+                $("#start_date").val(function(){
+
+                    str = new Date().format("yyyy-MM-dd");
+                    return str;
+                });
+
+
+                //得到当前时间
+                var date_now = new Date();
+                //得到当前年份
+                var year = date_now.getFullYear();
+                //得到当前月份
+                //注：
+                //  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
+                //  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
+                var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);
+                //得到当前日子（多少号）
+                var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
+                //设置input标签的max属性
+                $("#end_date").attr("min",year+"-"+month+"-"+date);
+
+                // 比较两日期之差
+                function daysBetween(DateOne,DateTwo)
+                {
+                    var OneMonth = DateOne.substring(5,DateOne.lastIndexOf ('-'));
+                    var OneDay = DateOne.substring(DateOne.length,DateOne.lastIndexOf ('-')+1);
+                    var OneYear = DateOne.substring(0,DateOne.indexOf ('-'));
+
+                    var TwoMonth = DateTwo.substring(5,DateTwo.lastIndexOf ('-'));
+                    var TwoDay = DateTwo.substring(DateTwo.length,DateTwo.lastIndexOf ('-')+1);
+                    var TwoYear = DateTwo.substring(0,DateTwo.indexOf ('-'));
+
+                    var cha=((Date.parse(OneMonth+'/'+OneDay+'/'+OneYear)- Date.parse(TwoMonth+'/'+TwoDay+'/'+TwoYear))/86400000);
+                    {#console.log(Math.abs(cha));#}
+                    return Math.abs(cha);
+                }
+                $("#end_date").change(function () {
+
+                    if (daysBetween(document.getElementById("start_date").value,document.getElementById("end_date").value) > $("#max_date").val()){
+                        alert('超出最大借阅日期！已为您更改为您能借阅的最大日期！');
+                        $("#end_date").val(function (){
+                            var max_date = $("#max_date").val();
+                            {#console.log(max_date);#}
+                            {#console.log(addDate($("#start_date").val(),parseInt(max_date)));#}
+                            return addDate($("#start_date").val(),parseInt(max_date));
+                        });
+                    }
+
+                });
+
+
+                {#console.log(document.getElementById("start_date"));#}
+
+
+
+                if (!($('#error').html()=="")){
+                    {#alert('1111');#}
+                    {#var txt=  "{{ error|safe }}";#}
+                    var txt=  $("#error").html();
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                }
+                else{
+                    {#alert('2222');#}
+
+                }
+
+
+            });
+        </script>
+        {#  商品详细开始   #}
+
+        <div class="mt30">
+        <div>
+            <b class="f14">商品详细：</b>
+        </div>
+        
+        <div class="clear"></div>
+        <div class="bl_3_f6f">
+            <div class="w970 mt20 m0a bgf6f br10" id="product_list">
+                <ul class="c999 f13 h40 li_left">
+                    <li class="w510 tl pl20">商品</li>
+                    <li class="w120 tc">售价</li>
+                    <li class="w120 tc">数量</li>
+                    <li class="w100 tr pl64">操作</li>
+                </ul>
+
+                                
+                <ul class="bt_1_eae bb_1_fff" id="goods_line_548546"></ul>
+                <ul class="c999 f13 h120 li_left" id="goods_list_548546">
+                    <li class="w510 tl pl20">
+                        <a href="#" target="_blank" class="fl">
+                            <img src="{{ book.image.url }}" width="80px" height="100px" class="m_10_20_10_0" alt="">
+                        </a>
+                        <span class="w390 bold c333 fl h20 mt35">{{ book.book_name }}</span>
+                    </li>
+                    <li class="w120 tc">
+                        <span class="bold ccf0 f16">{{ book.price }}(书豆)</span>
+                    </li>
+                    <li class="w120 tc">
+                        {#   将商品id保存下来用于form提交   #}
+{#                        <input type="text" value="{{ book.id }}" name="book_id" hidden>#}
+{#                        <span class="btne3d w18 h22 inbl re-t0-l5 ie-t1_m50 ie_mi">—</span>#}
+{#                        <input type="text" id="goods_number_548546" name="goods_number" maxlength="4" size="2" value="1" class="ignore b_1_e5e p_0_5 tc w28 h20  ie-t1_m50 ie_mi goods_number c000 bold" oprid="548546" oprnum="1" title="1">#}
+{#                        <span class="btne3d w18 h22 inbl re_t0-l5 ie-t1_m50 ie_mi">+</span>#}
+                        1
+                    </li>
+                    <li class="w100 tr pl64">
+                        <a  class="delete ul h120">删除</a>
+                    </li>
+                </ul>
+
+                <ul class="bt_1_eae bb_1_fff lb_ul"></ul>
+                <ul class="c999 f13 h40 li_left lb_ul">
+                    <li class="w510 pl20"><font class="bold c333">书香盈袖会员卡</font></li>
+                    <li class="w120 tc"><span class="ccf0">标配</span></li>
+                    <li class="w120 tc c333">1</li>
+                    <li class="w100 tr pl64">&nbsp;</li>
+                </ul>
+{##}
+{#                    <ul class="bt_1_eae bb_1_fff lb_ul"></ul>#}
+{#                    <ul class="c999 f13 h40 li_left lb_ul">#}
+{#                        <li class="w510 pl20"><font class="bold c333">爱宝时说明书</font></li>#}
+{#                        <li class="w120 tc"><font class="ccf0">标配</font></li>#}
+{#                        <li class="w120 tc c333">1</li>#}
+{#                        <li class="w100 tr pl64">&nbsp;</li>#}
+{#                    </ul>#}
+                                    
+
+
+
+
+                <input type="hidden" id="refresh_when_delete" value="0">
+
+                <ul class="bt_1_eae bb_1_fff"></ul>
+                <div class="c999 f12">
+{#                    <div class="fl">#}
+{#                        <div class="m20">#}
+{#                            <div class="m20">#}
+{#                            <b class="f14 c333">折扣优惠：</b>#}
+{#                            <select class="w410" onchange="javascript:location.href=&#39;/index/select_activity?id=&#39;+this.value">#}
+{#                                <option value="-1">----- 选择参与的活动折扣形式 -----</option>#}
+{#                                <option value="124">兴业银行活动</option>#}
+{#                                <option value="123">招行特惠活动：最高立减2000元！</option>#}
+{#                            </select>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="mt10 fl"></div>#}
+{#                    </div>#}
+
+
+                    <div class="fr mt10">
+                        <ul class="price">
+                            <li class="w200 h24 f14 c333">
+                                <span class="w100 tr fl">商品总额：</span>
+                                <span class="w90 tr bold ccf0 fl" id="f_goods_total">{{ book.price }}(书豆)</span>
+                            </li>
+                            <li class="w200 h24 f14 c333">
+                                <span class="w100 tr fl">运费：</span>
+                                <span class="w90 tr bold ccf0 fl">+￥0</span>
+                            </li>
+                            <li class="w200 h24 f14 c333">
+                                <span class="w100 tr fl">优惠券：</span>
+                                <span class="w90 tr bold ccf0 fl" id="bonus_detail">
+                                                                            - ￥<span id="bonus_amount">0</span>
+                                                                    </span>
+                            </li>
+                            <li class="w200 h24 f14 c333">
+                                <span class="w100 tr fl">礼品卡：</span>
+                                <span class="w90 tr bold ccf0 fl">
+                                    - ￥<span id="gift_card_amount">0</span>
+                                </span>
+                            </li>
+                                                    </ul>
+                    </div>
+                </div>
+
+                    <div id="f_gift_card_div_container">
+
+
+<div class="c999 f12">
+    <div class="fl">
+      <div class="mt10 fl"></div>
+    </div>
+
+</div></div>
+
+                <div class="clear"></div>
+            </div>
+        </div>    
+        <div id="ope" class="w930 m0a">
+            <div class="fl">
+                <div class="mt70 rel">
+                    <h1 style="font-size: 25px;color: #e60000" id="error" hidden>{{ error|safe }}</h1>
+{#                    <input type="text" name="order_note" id="order_note" class="ignore b_1_e5e p_0_5 w464 h34 cbbb f14" value="写下你的订单留言..." tip="写下你的订单留言..." maxlength="255">#}
+                </div>
+            </div>
+            <style type="text/css">
+                #recharge:hover{
+                    color: red;
+                }
+            </style>
+            <div class="fr">
+                <div class="tc cd00 mt20">
+                    <span class="f12 bold">最终需支付：
+                        <span class="f28" id="order_total">{{ book.price }}</span>(书豆)
+                    </span>
+
+                </div>
+                <div class="mt20">
+{#                    <input type="hidden" id="all_has_stock" value="1">#}
+{#                    <a rel="nofollow" id="order_pop_login" href="#" class=" fancybox.iframe" style="display:none;">检查登录</a> #}
+                    <input type="submit" id="order_checkout_submit" class="btnd00 w212 h40 f16 bold" value="提交订单，去支付">
+{#                    <b id="wait_submit" class="hide">订单正在提交中，请稍候<img style="width:24px;height:24px;" src="images/loading_1.gif"></b>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+        {#  商品详情结束  #}
+    </form>
+</div>
+
+
+
+
+
+
+<div id="footer">
+  <div class="info">
+    <p class="copyright">                书香盈袖 版权所有  www.jgzhen.com
+
+    </p>
+  </div>
+</div>
+</body>
+</html>

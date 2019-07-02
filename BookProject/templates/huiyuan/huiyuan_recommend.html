@@ -1,0 +1,93 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>本期特价</title>
+{% endblock %}
+
+{% block content %}
+
+
+<!-- End header -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/hot.css' %}" />
+<div id="main">
+
+    <div class="hot_goods_list">
+    	<div class="context">
+            <ul>
+                {% for search_book in search_books %}
+
+
+                <li><span class=""></span> <a href="{% url 'bookapp:detail' search_book.id %}" target="_parent" class="img">
+                    <img src="{{ search_book.image.url }}" width="200" height="250"/></a>
+                    <p><b>{{ search_book.book_name }}</b><br>
+                        {# 特惠价 #}
+                        <u></u>
+
+                        <ins>{{ search_book.price }}</ins>
+                        <del>原价：100</del>
+                        <br>
+                        <span class="cmt">已被查看<i>{{ search_book.check_number }}</i>次</span></p>
+
+                    <a class="btn btn-danger" style=" width:96px; height:36px;margin-left:100px;" href="{% url 'bookapp:book_borrow' search_book.id %}">立即借阅</a>
+                </li>
+                {% endfor %}
+
+{#                <li><span class=""></span> <a href="/tissot-g16801.html" target="_blank" class="img"><img#}
+{#                        src="Images/T035_210_11_011_00_03305.jpg" alt="天梭TISSOT-库图系列 T035.210.11.011.00 女士石英表"#}
+{#                        width="300" height="300"/></a>#}
+{#                    <p><b>天梭TISSOT-库图系列 T035.210.11.011.00 女士石英表</b><br>#}
+{#                        <u></u>#}
+{#                        <ins>￥2420</ins>#}
+{#                        <del>原价：￥2550.00</del>#}
+{#                        <br>#}
+{#                        <span class="cmt">已被评论<i>0</i>次</span></p>#}
+{#                    <a href="javascript:addToCartT(16801, 1, 1);" class="btn">立即抢购</a></li>#}
+
+
+{#                <li><span class="tips rec"></span> <a href="/jacques-lemans-g13291.html" target="_blank"#}
+{#                                                      class="img"><img src="Images/13291_23435.jpg"#}
+{#                                                                       alt="雅克利曼-La Passion系列 1-1547C 女士石英表" width="300"#}
+{#                                                                       height="300"/></a>#}
+{#                    <p><b>雅克利曼-La Passion系列 1-1547C 女士石英表</b><br>#}
+{#                        <u></u>#}
+{#                        <ins>￥990</ins>#}
+{#                        <del>原价：￥990.00</del>#}
+{#                        <br>#}
+{#                        <span class="cmt">已被评论<i>4</i>次</span></p>#}
+{#                    <a href="javascript:addToCartT(13291, 1, 1);" class="btn">立即抢购</a></li>#}
+
+            </ul>
+    	</div>
+        <br>
+  		<div class="fr" style="width: 100%;">
+    	
+            <div id="page_nav" style="float: right;"> 
+            	<span>一共有&nbsp;{{ search_books.paginator.count }}&nbsp;条记录&nbsp;&nbsp;</span>
+                {% if search_books.has_previous %}
+{#                    <span class="pre">#}
+                        <a href="?page={{ search_books.previous_page_number }}">上一页
+                            <span></span>
+                        </a>
+{#                    </span>&nbsp;#}
+                {% endif %}
+
+{#	      		<span class="cur">1</span>&nbsp;#}
+
+{#	      		<span>&hellip;</span>&nbsp;#}
+                    {% if search_books.has_next %}
+	      		    <a href="?page={{ search_books.next_page_number }}" class="next">下一页
+	      			    <span></span>
+	      		    </a>&nbsp;
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Begin footer -->
+{% endblock %}

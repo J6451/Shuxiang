@@ -1,0 +1,203 @@
+﻿
+{% extends 'base/base.html' %}
+
+{% block title %}
+    <title>首页</title>
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<!-- End header -->
+<!-- 主页css -->
+<link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css" media="screen, projection" />
+<!--<script type="text/javascript" src="Script/index.js"></script>-->
+
+<!--主页轮播图-->
+<div class="banner" id="banner" >
+	<a href="#" class="d1" style="background:url({% static 'Images/banner2.jpg' %}) center no-repeat;"></a>
+	<a href="#" class="d1" style="background:url({% static 'Images/banner1.jpg' %}) center no-repeat;"></a>
+	<a href="#" class="d1" style="background:url({% static 'Images/banner3.jpg' %}) center no-repeat;"></a>
+	<a href="#" class="d1" style="background:url({% static 'Images/banner4.jpg' %}) center no-repeat;"></a>
+	<div class="d2" id="banner_id">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</div>
+<!-- js轮播图调用 -->
+<script type="text/javascript">banner()</script>
+<!-- 主页轮播图结束-->
+
+<!-- 图片带 -->
+<div class="idxBnd">
+  <div class="tCnt w1225">
+  		<a href="" style="margin-right: 1px;_margin-right: 0;">
+  			<img src="{% static 'Images/banimg1.jpg' %}" alt=""  width="296" height="175"/>
+  		</a>
+  		<a href="" style="margin-right: 1px;_margin-right: 0;">
+  			<img width="298" height="175" src="{% static 'Images/banimg2.jpg' %}" alt="" />
+  		</a>
+		<a href="" style="margin-right: 1px;_margin-right: 0;">
+			<img width="300"  height="175" src="{% static 'Images/banimg3.jpg' %}" alt="" />
+		</a>
+		<a href="">
+			<img  width="300" height="175" src="{% static 'Images/banimg4.jpg' %}" alt="" />
+		</a>
+  </div>
+</div>
+<!-- 图片带结束 -->
+
+<!--<div id="hot_display_position"></div>-->
+<!-- 特价推荐 -->
+<div class="idxSet hotSet">
+
+        <div class="tTit w1225">
+            <span class="tNm">[历史推荐]</span>
+            <ul id="hotTit" class="tGud">
+{#				<li><a class="curr" href="#">男士</a></li>#}
+{#            	<li><a href="#">女士</a></li>#}
+{#            	<li><a href="#">情侣</a></li>#}
+{#            	<li><a href="#">特惠</a></li>#}
+{#            	<li><a href="">更多</a></li>   #}
+            </ul>
+
+        </div>
+        <div class="tBdy w1225" id="hotCon">
+            <div class="tPdtLst">
+                <div class="tLnk">
+             		
+              	</div>
+                <ul>
+				       {% for sale_book in sale_books %}
+				        <li>
+                        <a href="{% url 'bookapp:detail' sale_book.id %}">
+                            <!-- <i class="c__tMsk"></i> -->
+                            <img src="{{ sale_book.image.url }}"  width="200" height="250" />
+
+                            <div class="tNm">{{ sale_book.book_name }}</div >
+                            <div class="tPrc">{{ sale_book.price }}<i>（书豆）优惠价</i></div>
+                            <div class="tInfo">已借出<b>&nbsp; {{ sale_book.borrow_number }} </b></div >                        </a>
+                        </li>
+				       {% endfor %}
+                       
+                </ul>
+                <div class="mLnk" style="padding: 0 40px 0 0;">
+                <span style="float: right;"><a href="{% url 'bookapp:special_price' %}">查看更多>></a></span>
+                </div>
+            <!--</div>
+                <div class="mLnk">
+
+                </div>
+            </div>-->
+            
+        	</div>
+
+		</div>
+</div>
+<!-- 特价推荐结束 -->
+
+<!--<div id="rank_display_position"></div>-->
+<!-- 男士推荐 -->
+<div class="idxSet rankSet">
+
+    	<div class="tTit w1225">
+        	<span class="tNm">[编辑推荐]</span>
+        	<ul id="rankTit" class="tGud">
+{#            	<li><a class="curr" href="#">绅士</a></li>#}
+{#            	<li><a href="#">高档</a></li>#}
+{#            	<li><a href="">中档</a></li>#}
+{#            	<li><a href="#">更多</a></li>#}
+        	</ul>
+
+    	</div>
+{#    	<p align="center"><img src="{% static 'images/ban1.jpg' %}" /></p>#}
+
+		<div class="tBdy w1225" id="hotCon">
+            <div class="tPdtLst">
+                <div class="tLnk">
+         
+                </div>
+                <ul>
+                    {% for man_book in man_books %}
+                    <li>
+
+                        <a href="{% url 'bookapp:detail' man_book.id %}">
+                            <!-- <i class="c__tMsk"></i> -->
+                            <img src="{{ man_book.image.url }}"  width="200" height="250" />
+
+                            <div class="tNm">{{ man_book.book_name }}</div >
+                            <div class="tPrc">{{ man_book.price }}&nbsp;<i class="del">100</i></div>
+                            <div class="tInfo">已借出<b>&nbsp;{{ man_book.borrow_number }}</b></div >                        </a>
+                    </li>
+                    {% endfor %}
+
+
+
+                                      
+                        
+              </ul>
+                <div class="mLnk" style="padding: 0 40px 0 0;">
+                <span style="float: right;"><a href="">查看更多>></a></span>
+                </div>
+            </div>
+
+		</div>
+</div>
+<!--男士推荐结束-->
+
+<!-- 女士推荐 -->
+<div class="idxSet rankSet">
+
+    	<div class="tTit w1225">
+        	<span class="tNm">[出版社推荐]</span>
+        	<ul id="rankTit" class="tGud">
+{#            	<li><a  class="curr" href="#">文艺</a></li>#}
+{#            	<li><a href="#">高档</a></li>#}
+{#            	<li><a href="#">中档</a></li>#}
+{#            	<li><a href="#">更多</a></li>#}
+        	</ul>
+
+    	</div>
+{#		<p align="center"><img src="images/ban1.jpg" /></p>#}
+    	<div class="tBdy w1225" id="hotCon">
+            <div class="tPdtLst">
+                <div class="tLnk">
+
+                </div>
+                <ul>
+                {% for lady_book in lady_books %}
+                    <li>
+                        <a href="{% url 'bookapp:detail' lady_book.id %}">
+                            <!-- <i class="c__tMsk"></i> -->
+                            <img src="{{ lady_book.image.url }}"  width="200" height="250" />
+                            <div class="tNm">{{ lady_book.book_name }}</div >
+                            <div class="tPrc">{{ lady_book.price }}&nbsp;<i class="del">100</i></div>
+                            <div class="tInfo">已借出<b>&nbsp;{{ lady_book.borrow_number }}</b></div >                        </a>
+                    </li>
+                {% endfor %}
+
+
+
+
+
+                                       
+                      
+                </ul>
+                <div class="mLnk" style="padding: 0 40px 0 0;">
+                <span style="float: right;"><a href="">查看更多>></a></span>
+                </div>
+            </div>
+                <!--<div class="mLnk">
+
+                </div>-->
+        </div>
+</div>
+<!-- 女士推荐结束 -->
+
+
+{% endblock %}
+

@@ -1,0 +1,96 @@
+﻿{% extends 'base/base.html' %}
+
+{% block title %}
+    <title>首页</title>
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<!--放大镜定义-->
+<script type="text/javascript" src="{% static 'Script/mzp-packed.js' %}"></script>
+<link href="{% static 'css/magiczoomplus.css' %}" type="text/css" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'css/xiangxi.css' %}">
+<input type="hidden" id="s" value="0" />
+{#<style type="text/css">#}
+{#    * html,* html body /* 修正IE6振动bug */{background-image:url(Images/about:blank);background-attachment:fixed;}#}
+{#    * html .fixed-top /* IE6 头部固定 */{position:absolute;left:auto;top:expression(eval(document.documentElement.scrollTop > 690 ? document.documentElement.scrollTop : 690));}#}
+{#</style>#}
+    <style type="text/css">
+    #dl{float: left;width: 600px}
+    .dt{float: left;width: 200px;font-size: 15px;margin-bottom: 10px}
+    .dd{float: left;width: 400px;font-size: 15px;margin-bottom: 10px}
+
+    h3{
+                  background: #e4f0fe;
+    }
+
+    #nrjj,#zyz,#ml,#qy,#mtpl,#sz{
+              background: #e4f0fe;
+    }
+
+
+    </style>
+
+<div id="main2">
+	<div class="map">
+    	<div class="map_info">当前位置: <a href="">首页</a> <code>&gt;</code>图书详情</div>
+    </div>
+{#    <div class="banner_2"><img src="{% static 'Images/bannerinfo.jpg' %}" /></div>#}
+    <div class="shop_info1 clearfix">
+    	<div class="shop_info1_img">
+               <div class="left-pro">
+                    <div class="t2">
+{#                        <a href="{% static 'Images/img01.jpg' %}" id="zoom1" class="MagicZoom MagicThumb">#}
+{#                            <img src="{% static 'Images/img01.jpg' %}" width="350" height="350" class="main_img" id="main_img" style="width:400px; height:400px;" /></a>#}
+{#                        #}
+                         <a href="{{ book.image.url }}" id="zoom1" class="MagicZoom MagicThumb">
+                            <img src="{{ book.image.url }}" width="250" height="350" class="main_img" id="main_img" style="width:400px; height:450px;" /></a>
+
+                    </div>
+
+                </div>
+		</div>
+         <div class="shop_info1_tit">
+             <div class="text_life" style="height: 50px;margin: 10px 0 0 0">
+                <span style="font-size: 20px" class="shop_tit">{{ book.book_name }}</span>
+             </div>
+             <div class="xian clearfix"></div>
+
+             <div class="shuliang" style="height: 200px;margin: 10px 0 0 10px;width: 600px;">
+                 <dl id="dl">
+                     <dt class="dt">作者：</dt><dd class="dd">{{ book.author }}</dd>
+                     <dt class="dt">出版社：</dt><dd class="dd">{{ book.press }}</dd>
+                     <dt class="dt">出版日期：</dt><dd class="dd">{{ book.press_time }}</dd>
+                     <dt class="dt">价格：</dt><dd class="dd">{{ book.price }}（书豆）</dd>
+                     <dt class="dt">所需信用值：</dt><dd class="dd">{{ book.credit_value }}</dd>
+                     <dt class="dt">书本剩余数量：</dt><dd class="dd">{{ book.surplus_number_book }}</dd>
+                 </dl>
+             </div>
+             <div style="width: 600px;height: 100px">
+                 <div style="width:300px;height:50px;margin: 0 auto;">
+                    <a class="btn btn-warning" style="width: 280px" href="{% url 'bookapp:book_borrow' book.id %}">借阅</a>
+                 </div>
+                 <div style="width:600px;height:50px;">
+                    <a href="{% url 'bookapp:book_comment' book.id %}" class="btn btn-danger">所有评论</a>
+                 </div>
+             </div>
+         </div>
+         <script type="text/javascript" src="{% static 'Script/lrtk.js' %}"></script>
+    </div><!--end shop_info1-->
+
+    <div style="float: right;width: 800px;font-size: 13px;line-height: 150%">
+{#        详情开始 #}
+
+{{ book.intro|safe }}
+
+{#         详情结束 #}
+    </div>
+
+</div>
+<!--main2:end-->
+<link rel="stylesheet" href="{% static 'css/jqzoom.css' %}" type="text/css">
+<!-- Begin footer -->
+{% endblock %}

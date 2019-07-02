@@ -1,0 +1,34 @@
+﻿@charset "utf-8";/*<reset css>*/
+.hot_ad{ padding-top:5px;}
+.hot_goods_list{ clear:both;}
+.hot_goods_list .title{ height:63px; text-indent:-9999px;}
+.hot_goods_list .men{ background:url(images/hot_men.jpg) no-repeat 0 0;}
+.hot_goods_list .women{background:url(images/hot_women.jpg) no-repeat 0 0;}
+.hot_goods_list .context{}
+.hot_goods_list .context ul{ padding:15px 30px 0 30px;}
+.hot_goods_list .context ul li{ float:left; width:300px; padding-bottom:30px; position:relative;}
+.hot_goods_list .context ul li a.img{ display:block; width:300px; height:300px; border:1px solid #fff; text-align:center;}
+.hot_goods_list .context ul li p{ display:block; height:60px; line-height:20px; padding-bottom:5px;}
+.hot_goods_list .context ul li b{ display:block; float:left; width:270px; line-height:20px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#444; font-weight:normal; font-size:12px;}
+.hot_goods_list .context ul li u{ display:inline-block; width:50px; height:18px; background:url(images/all.jpg) no-repeat -200px 3px; }
+.hot_goods_list .context ul li ins{ line-height:18px; color:red; font-weight:bold; font-size:16px;text-indent:60px; font-family:'Microsoft YatHei'}
+.hot_goods_list .context ul li del{ color:gray; margin-left:25px;}
+.hot_goods_list .context ul li span.cmt{ display:inline-block; line-height:18px; color:#444; line-height:24px;}
+.hot_goods_list .context ul li i{ color:#000; font-weight:bold; padding:0 3px; font-style:normal}
+/*.hot_goods_list .context ul li a.btn{ display:block; width:96px; height:36px; text-indent:-9999px; background:url(images/all.jpg) no-repeat 0 0; margin-left:100px;}*/
+.hot_goods_list .context ul li span.tips{ display:block; width:44px; height:47px; position:absolute; right:0; top:0; background-repeat:no-repeat; background-image:url(images/all.jpg);}
+.hot_goods_list .context ul li span.rec{ width:55px; height:55px; background-position:-250px 0;}
+.hot_goods_list .context ul li span.new{ background-position:0 -50px;}
+.hot_goods_list .context ul li span.hot{ background-position:-50px -50px;}
+.hot_goods_list .context ul li span.z6{ background-position:-100px -50px;}
+.hot_goods_list .context ul li span.z75{ background-position:-150px -50px;}
+.hot_goods_list .context ul li span.z7{ background-position:-200px -50px;}
+.hot_goods_list .context ul li span.z8{ background-position:0 -100px;}
+.hot_goods_list .context ul li span.z83{ background-position:-50px -100px;}
+.hot_goods_list .context ul li span.z85{ background-position:-100px -100px;}
+.hot_goods_list .context ul li.sale_out{}
+.hot_goods_list .context ul li.sale_out a.img{ position:relative}
+.hot_goods_list .context ul li.sale_out a.img span{ position:absolute; display:block; width:100%; height:300px; background:url(images/sale_out.png) no-repeat center center;behavior:url(images/iepngfix.htc)}
+.hot_goods_list .context ul li.sale_out a.btn{ background-position:-100px 0;}
+
+.page-nav{ text-align:center; font-size:14px}

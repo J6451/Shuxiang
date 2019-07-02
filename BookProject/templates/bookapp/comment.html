@@ -1,0 +1,92 @@
+﻿{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>评论</title>
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/xiangxi.css' %}">
+
+    <div>
+        <div class="shop_info1 clearfix">
+            <div class="shop_info1_img" style="margin: 0 0 0 20px">
+                <div class="left-pro">
+                    <div class="t2">
+                        <a href="{{ book.image.url }}" id="zoom1" class="MagicZoom MagicThumb">
+                            <img src="{{ book.image.url }}" width="250" height="350" class="main_img" id="main_img"
+                                 style="width:400px; height:450px;"/></a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="shop_info1_tit">
+            {% ifequal user 'AnonymousUser' %}
+                <br>
+            {% else %}
+                <form action="{% url 'bookapp:book_comment' book.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="text_life" style="height: 50px;margin: 10px 0 0 0">
+                        <span style="font-size: 20px" class="shop_tit">商品评论</span>
+                    </div>
+
+                    <div class="xian clearfix" style="height:80px;width: 550px">
+                        <textarea name="comment" style="height: 80px;width: 550px"></textarea>
+                    </div>
+                    <br>
+                    <div style="width: 600px;height: 50px;">
+
+                        <div style="width:600px;height:50px;">
+                            <button type="submit" class="btn btn-danger">评论</button>
+                        </div>
+                    </div>
+                </form>
+            {% endifequal %}
+
+
+                <div style="height: 600px">
+                    <h1>所有评论</h1><br><br>
+                    <div style="height: 550px">
+                    {% if user_book_comments %}
+                        {% for user_book_comment in user_book_comments %}
+                        <div style="margin: 10px 0 20px 0">
+                            <div style="width: 200px;">
+                                <span style="font-size: 15px;">{{ user_book_comment.user.username }}</span>
+                                <span style="font-size: 13px;color: red;float: right">{{ user_book_comment.comment_time }}</span>
+                            </div>
+                            <br>
+{#                            <div style="width: 400px;background: green"></div>#}
+                            <textarea style="width: 600px;resize: none" readonly="readonly">{{ user_book_comment.comment }}</textarea>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <h3 style="color: red">暂无评论</h3>
+                    {% endif %}
+
+
+{#                         <div style="margin: 10px 0 20px 0">#}
+{#                            <div style="width: 200px;">#}
+{#                                <span style="font-size: 15px;">张三</span>#}
+{#                                <span style="font-size: 13px;color: red;float: right">2019-02-04</span>#}
+{#                            </div>#}
+{#                            <br>#}
+{#                            <div style="width: 400px;background: green"></div>#}
+{#                            <textarea style="width: 600px;resize: none" readonly="readonly">111</textarea>#}
+{#                        </div>#}
+
+{#                         <div style="margin: 10px 0 20px 0">#}
+{#                            <div style="width: 200px;">#}
+{#                                <span style="font-size: 15px;">张三</span>#}
+{#                                <span style="font-size: 13px;color: red;float: right">2019-02-04</span>#}
+{#                            </div>#}
+{#                            <br>#}
+{#                            <div style="width: 400px;background: green"></div>#}
+{#                            <textarea style="width: 600px;resize: none" readonly="readonly">111</textarea>#}
+{#                        </div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
