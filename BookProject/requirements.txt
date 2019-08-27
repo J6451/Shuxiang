@@ -1,7 +1,7 @@
 backports.csv==1.0.7
 defusedxml==0.5.0
 diff-match-patch==20181111
-Django==1.11
+Django==1.11.23
 django-crispy-forms==1.7.2
 django-crontab==0.7.1
 django-formtools==2.1
