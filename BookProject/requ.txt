@@ -1,7 +1,0 @@
-django==1.11
-djangorestframework
-pymysql
-pillow
-django-crontab
-pip install 绝对路径/xadmin-master.git
-jieba
